@@ -71,7 +71,7 @@ const DesktopHeader = () =>
                                             variant='#ffffff'
                                             style={{ width: '100%', background: '#ffffff', margin: 0, padding: 0 }}>
                                             {category.subCategorys.map((sub) => (
-                                                <Dropdown.Item key={sub} href={`/search/${sub}`}>{sub}</Dropdown.Item>
+                                                <Dropdown.Item key={sub} href={`/search/${sub.trim()}`}>{sub}</Dropdown.Item>
                                             ))}
                                         </DropdownButton>
                                     ))
