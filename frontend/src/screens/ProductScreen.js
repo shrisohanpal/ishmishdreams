@@ -15,6 +15,7 @@ import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
 const ProductScreen = ({ history, match }) =>
 {
+    const [currentImage, setCurrentImage] = useState('')
     const [qty, setQty] = useState(1)
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
@@ -44,6 +45,8 @@ const ProductScreen = ({ history, match }) =>
         if (!product._id || product._id !== match.params.id) {
             dispatch(listProductDetails(match.params.id))
             dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+        } else {
+            setCurrentImage(product.image[0])
         }
     }, [dispatch, match, successProductReview, product._id])
 
@@ -65,9 +68,7 @@ const ProductScreen = ({ history, match }) =>
 
     return (
         <>
-            <Link className='btn btn-light my-3' to='/'>
-                Go Back
-      </Link>
+            <Button style={{ background: '#ffffff', color: '#000000' }} className='my-3' onClick={() => history.goBack()}>Go Back</Button>
             {loading ? (
                 <Loader />
             ) : error ? (
@@ -77,7 +78,7 @@ const ProductScreen = ({ history, match }) =>
                     <Meta title={product.name} />
                     <Row>
                         <Col md={6}>
-                            <Carousel pause='hover' className='bg-light' style={{ paddingTop: '0%' }} >
+                            {/* <Carousel pause='hover' className='bg-light' style={{ paddingTop: '0%' }} >
                                 {product.image &&
                                     product.image.map((x, k) => (
                                         <Carousel.Item key={k}>
@@ -87,8 +88,25 @@ const ProductScreen = ({ history, match }) =>
                                         </Carousel.Item>
                                     ))
                                 }
-
-                            </Carousel>
+                            </Carousel> */}
+                            <Row>
+                                <Col md={2}>
+                                    {product.image &&
+                                        product.image.map((x, k) => (
+                                            <Row key={k}>
+                                                <button onClick={() => setCurrentImage(x)} style={{ height: 80, width: 80 }}>
+                                                    <Image style={{ display: 'block', width: '100%', height: '100%', borderRadius: '10%', margin: '0%' }} src={x} alt={product.name} fluid />
+                                                </button>
+                                            </Row>
+                                        ))
+                                    }
+                                </Col>
+                                <Col>
+                                    <div style={{ height: 400 }}>
+                                        <Image style={{ display: 'block', width: '100%', height: '100%', borderRadius: '1%', margin: '0%' }} src={currentImage} alt={product.name} fluid />
+                                    </div>
+                                </Col>
+                            </Row>
                         </Col>
                         <Col md={3}>
                             <ListGroup variant='flush'>
