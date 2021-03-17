@@ -148,7 +148,7 @@ const ProductEditScreen = ({ match, history }) =>
                 name,
                 price,
                 mrp,
-                image: [image, image2, image3],
+                image: image2 ? image3 ? [image, image2, image3] : [image, image2] : [image],
                 brand,
                 category,
                 subCategory,
@@ -278,8 +278,8 @@ const ProductEditScreen = ({ match, history }) =>
                                 as='select'
                                 value={category}
                                 //onChange={(e) => console.log(e.target.value)}
-                                onChange={(e) => setCategory(e.target.value)}
-                            >
+                                onChange={(e) => setCategory(e.target.value)}>
+                                <option>Select Category</option>
                                 {!categoryLoading && !categoryError && (
                                     categorys.map((category) => (
                                         <option key={category._id}>{category.name}</option>
@@ -294,6 +294,7 @@ const ProductEditScreen = ({ match, history }) =>
                                 as='select'
                                 value={subCategory}
                                 onChange={(e) => setSubCategory(e.target.value)}>
+                                <option>Select Sub Category</option>
                                 {!categoryLoading && !categoryError && categorys.find(cat => cat.name === String(category)) && (
                                     categorys.find(cat => cat.name === String(category)).subCategorys.map((sub) => (
                                         <option key={sub}>{sub}</option>
