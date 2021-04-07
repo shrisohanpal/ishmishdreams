@@ -90,7 +90,7 @@ const ProductScreen = ({ history, match }) =>
                                 }
                             </Carousel> */}
                             <Row>
-                                <Col md={2}>
+                                <Col xs={2}>
                                     {product.image &&
                                         product.image.map((x, k) => (
                                             <Row key={k}>
@@ -120,7 +120,7 @@ const ProductScreen = ({ history, match }) =>
                                     />
                                 </ListGroup.Item>
                                 <ListGroup.Item style={{ color: 'red' }}>MRP: ₹ <strike>{product.mrp}</strike></ListGroup.Item>
-                                <ListGroup.Item>Price: ₹{product.price}</ListGroup.Item>
+                                <ListGroup.Item>Our Price: ₹{product.price} {(((product.mrp - product.price) * 100) / product.mrp).toFixed(2)}%OFF</ListGroup.Item>
                                 <ListGroup.Item>
                                     Description: {product.description}
                                 </ListGroup.Item>

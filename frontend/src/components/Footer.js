@@ -12,16 +12,10 @@ const Footer = () =>
                             <Navbar.Brand>Contact Details</Navbar.Brand>
                             <ul>
                                 <li style={{ color: 'white' }}>
-                                    G - 10015,
+                                    Email: contact@ishmishdreams.com
                                 </li>
                                 <li style={{ color: 'white' }}>
-                                    Tower 17,
-                                </li>
-                                <li style={{ color: 'white' }}>
-                                    River Heights,
-                                </li>
-                                <li style={{ color: 'white' }}>
-                                    Raj Nagar Extension
+                                    Phone: +91 9911 000 989
                                 </li>
                             </ul>
                         </Col>
@@ -43,7 +37,7 @@ const Footer = () =>
                             <Navbar.Brand>Social Media Links</Navbar.Brand>
                             <ul>
                                 <li>
-                                    <Nav.Link style={{ color: 'white' }} href="https://www.facebook.com/aalok.ishmishdreams">Facebook</Nav.Link>
+                                    <Nav.Link style={{ color: 'white' }} href="https://www.facebook.com/Ishmishdreams-105303715005678">Facebook</Nav.Link>
                                 </li>
                                 <li>
                                     <Nav.Link style={{ color: 'white' }} href="https://www.instagram.com/ishmishdreams/">Instagram</Nav.Link>

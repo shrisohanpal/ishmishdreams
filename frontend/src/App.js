@@ -31,8 +31,8 @@ const App = () =>
   return (
     <Router>
       <Header />
-      <main className='py-0' style={{ marginTop: window.innerWidth < 780 ? 108 : 120 }}>
-        <Container>
+      <main className='py-3' style={{ marginTop: window.innerWidth < 780 ? 108 : 120 }}>
+        <Container className='px-1 mx-1'>
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/payment' component={PaymentScreen} />
