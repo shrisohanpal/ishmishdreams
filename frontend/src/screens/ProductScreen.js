@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, ListGroup, Card, Button, Form, Carousel } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button, Form, Carousel, OverlayTrigger , Tooltip} from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -66,17 +66,24 @@ const ProductScreen = ({ history, match }) =>
         )
     }
 
+    const zoomImage = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+        Simple tooltip
+      </Tooltip>
+    )
+
+
     return (
-        <>
+        <div className='p-2 m-2'>
             <Button style={{ background: '#ffffff', color: '#000000' }} className='my-3' onClick={() => history.goBack()}>Go Back</Button>
             {loading ? (
                 <Loader />
             ) : error ? (
                 <Message variant='danger'>{error}</Message>
             ) : (
-                <>
+                <div >
                     <Meta title={product.name} />
-                    <Row>
+                    <Row >
                         <Col md={6}>
                             {/* <Carousel pause='hover' className='bg-light' style={{ paddingTop: '0%' }} >
                                 {product.image &&
@@ -90,7 +97,7 @@ const ProductScreen = ({ history, match }) =>
                                 }
                             </Carousel> */}
                             <Row>
-                                <Col xs={2}>
+                                <Col xs={2} className='m-3'>
                                     {product.image &&
                                         product.image.map((x, k) => (
                                             <Row key={k}>
@@ -103,7 +110,12 @@ const ProductScreen = ({ history, match }) =>
                                 </Col>
                                 <Col>
                                     <div style={{ height: 400 }}>
-                                        <Image style={{ display: 'block', width: '100%', height: '100%', borderRadius: '1%', margin: '0%' }} src={currentImage} alt={product.name} fluid />
+                                        <OverlayTrigger
+                                         delay={{ show: 250, hide: 400 }}
+                                        overlay={zoomImage}
+                                        >
+                                            <Image style={{ display: 'block', width: '100%', height: '100%', borderRadius: '1%', margin: '0%' }} src={currentImage} alt={product.name} fluid />
+                                        </OverlayTrigger>
                                     </div>
                                 </Col>
                             </Row>
@@ -119,10 +131,11 @@ const ProductScreen = ({ history, match }) =>
                                         text={`${product.numReviews} reviews`}
                                     />
                                 </ListGroup.Item>
-                                <ListGroup.Item style={{ color: 'red' }}>MRP: ₹ <strike>{product.mrp}</strike></ListGroup.Item>
-                                <ListGroup.Item>Our Price: ₹{product.price} {(((product.mrp - product.price) * 100) / product.mrp).toFixed(2)}%OFF</ListGroup.Item>
+                                <ListGroup.Item>Our Price: ₹{product.price} <strike  style={{ color: 'red' }}> MRP: ₹ {product.mrp}</strike> {(((product.mrp - product.price) * 100) / product.mrp).toFixed(2)}%OFF</ListGroup.Item>
                                 <ListGroup.Item>
-                                    Description: {product.description}
+                                <div style={{ height: 200, overflowY: 'scroll', marginBottom: 20 }}>
+                                     {product.description}
+                                </div>
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
@@ -273,9 +286,9 @@ const ProductScreen = ({ history, match }) =>
                             </ListGroup>
                         </Col>
                     </Row>
-                </>
+                </div>
             )}
-        </>
+        </div>
     )
 }
 
