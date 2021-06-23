@@ -15,6 +15,9 @@ import
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
     USER_DETAILS_RESET,
+    USER_FORGOT_PASSWORD_REQUEST,
+    USER_FORGOT_PASSWORD_SUCCESS,
+    USER_FORGOT_PASSWORD_FAIL,
     USER_LIST_FAIL,
     USER_LIST_SUCCESS,
     USER_LIST_REQUEST,
@@ -188,6 +191,33 @@ export const updateUserProfile = (user) => async (dispatch, getState) =>
                     : error.message
         })
     }
+}
+
+
+export const forgotPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_FORGOT_PASSWORD_REQUEST,
+    })
+
+    const { data } = await axios.post(
+      `/api/users/forgotpassword`,
+      { email }
+    )
+
+    dispatch({
+      type: USER_FORGOT_PASSWORD_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: USER_FORGOT_PASSWORD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
 }
 
 

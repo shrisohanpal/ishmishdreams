@@ -8,7 +8,7 @@ const Product = ({ product }) =>
 {
     return (
         <Card className='my-3 py-3 px-1 rounded' style={{ overflow: 'hidden' }}>
-            <Link to={`/product/${product._id}`}>
+            <a href={`/product/${product._id}`}>
                 <Image style={{ display: 'block', width: '100%', height: 150 }} src={product.image[0]} variant='top' fluid />
                 <Card.Body>
                     <Card.Title as='div'>
@@ -25,7 +25,7 @@ const Product = ({ product }) =>
                     </div>
                     <Button style={{ background: '#c60062' }} className="w-100">View</Button>
                 </Card.Body>
-            </Link>
+            </a>
         </Card>
     )
 }

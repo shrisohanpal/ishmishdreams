@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import Modal from 'react-modal';
 import { Row, Col, Image, ListGroup, Card, Button, Form, Carousel, OverlayTrigger , Tooltip} from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
@@ -66,11 +67,23 @@ const ProductScreen = ({ history, match }) =>
         )
     }
 
-    const zoomImage = (props) => (
-        <Tooltip id="button-tooltip" {...props}>
-        Simple tooltip
-      </Tooltip>
-    )
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const changeState = () => {
+        setIsOpen(!modalIsOpen)
+    }
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            height:500,
+            width:800,
+            padding:0,
+            //marginRight: '-50%',
+            transform: 'translate(-50%, -50%)'
+        }
+    };
 
 
     return (
@@ -110,12 +123,24 @@ const ProductScreen = ({ history, match }) =>
                                 </Col>
                                 <Col>
                                     <div style={{ height: 400 }}>
-                                        <OverlayTrigger
-                                         delay={{ show: 250, hide: 400 }}
-                                        overlay={zoomImage}
-                                        >
-                                            <Image style={{ display: 'block', width: '100%', height: '100%', borderRadius: '1%', margin: '0%' }} src={currentImage} alt={product.name} fluid />
-                                        </OverlayTrigger>
+                                            <Image 
+                                            style={{ display: 'block', width: '100%', height: '100%', borderRadius: '1%', margin: '0%' }} 
+                                            src={currentImage} 
+                                            alt={product.name} fluid
+                                            onClick={changeState} />
+                            
+                                            <Modal
+                                                 isOpen={modalIsOpen}
+                                                //  onAfterOpen={afterOpenModal}
+                                                //  onRequestClose={closeModal}
+                                                style={customStyles}
+                                                contentLabel="Example Modal">
+                                                      <Image 
+                                            style={{ display: 'block', width: '100%', height: '100%', borderRadius: '1%', margin: '0%' }} 
+                                            src={currentImage} 
+                                            alt={product.name} fluid
+                                            onClick={changeState} />
+                                                </Modal>
                                     </div>
                                 </Col>
                             </Row>
@@ -218,7 +243,8 @@ const ProductScreen = ({ history, match }) =>
                                 </ListGroup>
                             </Card>
                         </Col>
-                    </Row>
+                            </Row>
+                            
                     <Row>
                         <Col md={6}>
                             <h2>Reviews</h2>

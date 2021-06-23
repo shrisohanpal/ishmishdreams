@@ -1,4 +1,6 @@
+import nodemailer from 'nodemailer'
 import asyncHandler from 'express-async-handler'
+import randomstring from 'randomstring'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
 
@@ -110,6 +112,49 @@ const updateUserProfile = asyncHandler(async (req, res) =>
 })
 
 
+
+// @desc    Create new Password
+// @route   POST /api/users/forgotpassword
+// @access  Public
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body
+
+  const user = await User.findOne({ email })
+
+  if (user) {
+    const newPass = randomstring.generate(6)
+    user.password = newPass
+    await user.save()
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAILID,
+        pass: process.env.GMAILIDPASS
+      }
+    });
+
+    var mailOptions = {
+      from: process.env.GMAILID,
+      to: email,
+      subject: 'RESET PASSWORD ON ISHMISHDREAMS',
+      html: `Your new password is ${newPass}\n Please login with this Password and Change your password!`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        res.status(401)
+        throw new Error(error.message)
+      } else {
+        res.json({ message: 'New Password sent on your Email Address!' })
+      }
+    })
+  } else {
+    res.status(401)
+    throw new Error('Invalid Email')
+  }
+})
+
 // @desc    Get all users
 // @route   GET /api/users
 // @access  Private/Admin
@@ -182,6 +227,7 @@ export
     registerUser,
     getUserProfile,
     updateUserProfile,
+    forgotPassword,
     getUsers,
     deleteUser,
     getUserById,

@@ -18,6 +18,9 @@ import
     USER_UPDATE_PROFILE_FAIL,
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
+    USER_FORGOT_PASSWORD_REQUEST,
+    USER_FORGOT_PASSWORD_SUCCESS,
+    USER_FORGOT_PASSWORD_FAIL,
     USER_DELETE_REQUEST,
     USER_DELETE_SUCCESS,
     USER_DELETE_FAIL,
@@ -89,6 +92,22 @@ export const userUpdateProfileReducer = (state = { user: {} }, action) =>
             return state
     }
 }
+
+
+export const userForgotPasswordReducer = (state = {}, action) =>
+{
+  switch (action.type) {
+    case USER_FORGOT_PASSWORD_REQUEST:
+      return { loading: true }
+    case USER_FORGOT_PASSWORD_SUCCESS:
+      return { loading: false, success: true }
+    case USER_FORGOT_PASSWORD_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
 
 export const userListReducer = (state = { users: [] }, action) =>
 {
