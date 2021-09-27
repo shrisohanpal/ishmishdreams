@@ -26,6 +26,7 @@ import PrivacyPolicyScreen from './screens/PrivacyPolicyScreen'
 import ReturnPolicyScreen from './screens/ReturnPolicyScreen'
 import TermsandConditionsScreen from './screens/TermsandConditionsScreen'
 import ContactScreen from './screens/ContactScreen'
+import Abc from './screens/abc'
 
 const App = () =>
 {
@@ -34,6 +35,7 @@ const App = () =>
       <Header />
       <main className='py-3' style={{ marginTop: window.innerWidth < 780 ? 108 : 120 }}>
         <Container className='px-1 mx-1'>
+          <Route path='/abc' component={Abc} />
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/payment' component={PaymentScreen} />
