@@ -79,7 +79,8 @@ const ProductScreen = ({ history, match }) =>
             bottom: 'auto',
             height:500,
             width:800,
-            padding:0,
+            padding: 0,
+            marginTop:'70px',
             //marginRight: '-50%',
             transform: 'translate(-50%, -50%)'
         }
@@ -157,11 +158,11 @@ const ProductScreen = ({ history, match }) =>
                                     />
                                 </ListGroup.Item>
                                 <ListGroup.Item>Our Price: ₹{product.price} <strike  style={{ color: 'red' }}> MRP: ₹ {product.mrp}</strike> {(((product.mrp - product.price) * 100) / product.mrp).toFixed(2)}%OFF</ListGroup.Item>
-                                <ListGroup.Item>
+                                {/*<ListGroup.Item>
                                 <div style={{ height: 200, overflowY: 'scroll', marginBottom: 20 }}>
                                      {product.description}
                                 </div>
-                                </ListGroup.Item>
+                                </ListGroup.Item>*/}
                             </ListGroup>
                         </Col>
                         <Col md={3}>
@@ -242,7 +243,14 @@ const ProductScreen = ({ history, match }) =>
                                     </ListGroup.Item>
                                 </ListGroup>
                             </Card>
-                        </Col>
+                                </Col>
+                               
+                                    <div
+                                    style={{  margin: 20, whiteSpace:'pre-wrap' }}
+                                >
+                                     {product.description}
+                                </div>
+                               
                             </Row>
                             
                     <Row>
