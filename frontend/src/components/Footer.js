@@ -54,7 +54,7 @@ const Footer = () =>
             <Navbar bg="dark" variant="dark">
                 <Col style={{ color: 'white' }} className='text-center py-3'>
                     Copyright &copy; IshMishDreams <br />
-                    <a href="https://slanzapanika.com" style={{ color: 'white', textTransform: 'capitalize' }}>Designed & Developed By: Darshan (SlanzApanika) </a>
+                    <a href="https://slanzapanika.com" style={{ color: 'white', textTransform: 'capitalize' }}></a>
                 </Col>
             </Navbar>
         </footer>
